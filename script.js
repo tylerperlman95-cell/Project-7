@@ -60,6 +60,8 @@ const destinations = [
 
 // 2. Find the gallery
 const gallery = document.getElementById("destination-gallery");
+const sortButton = document.getElementById("sort-az");
+
 
 // 3. Display destination cards
 function displayDestinations(list) {
@@ -67,13 +69,10 @@ function displayDestinations(list) {
         console.error("Destination gallery was not found.");
         return;
     }
-
     gallery.innerHTML = "";
-
     list.forEach(destination => {
         const card = document.createElement("div");
         card.className = "destination-card";
-
         card.innerHTML = `
             <div class="destination-image">
                 <img src="${destination.image}" alt="${destination.name}">
@@ -81,40 +80,46 @@ function displayDestinations(list) {
                     <h3>${destination.name}</h3>
                 </div>
             </div>
-
             <div class="destination-info">
                 <p>${destination.category}</p>
                 <p>${destination.description}</p>
-
                 <button type="button" class="details-button">
                     View Details
                 </button>
-
                 <p class="extra-details" hidden>
                     ${destination.details}
                 </p>
             </div>
         `;
-
         gallery.appendChild(card);
-
-        // 4. View Details button
-        const button = card.querySelector(".details-button");
-        const details = card.querySelector(".extra-details");
-
-        button.addEventListener("click", function () {
-            details.hidden = !details.hidden;
-
-            if (details.hidden) {
-                button.textContent = "View Details";
-            } else {
-                button.textContent = "Hide Details";
-            }
-        });
     });
 }
+// 4. View Details button
+gallery.addEventListener("click", function (event) {
+    const button = event.target.closest(".details-button");
+    if (!button) return;
+    const card = button.closest(".destination-card");
+    const details = card.querySelector(".extra-details");
+    details.hidden = !details.hidden;
+    button.textContent = details.hidden
+        ? "View Details"
+        : "Hide Details";
+});
+// Sort destinations alphabetically
+if (sortButton && gallery) {
+    sortButton.addEventListener("click", function () {
+        const sortedDestinations = [...destinations];
 
+        sortedDestinations.sort((a, b) =>
+            a.name.localeCompare(b.name)
+        );
+
+        displayDestinations(sortedDestinations);
+    });
+}
 // 5. Display all destinations when page loads
 if (gallery) {
     displayDestinations(destinations);
 }
+
+
