@@ -25,7 +25,7 @@ const destinations = [
         category: "Cities",
         image: "images/LosAngeles.jpg",
         description: "Known for its celebrity landmarks and the Hollywood Sign.",
-        details: "Walk the Hollywood Walk of Fame, visit the Hollywood Sign, and explore Universal Studios.",
+        details: "Walk the Hollywood Walk of Fame, Visit the Hollywood Sign, and Explore Universal Studios.",
         rating: 4,
         dateAdded: "2026-03-05"
     },
@@ -95,16 +95,18 @@ function displayDestinations(list) {
     });
 }
 // 4. View Details button
-gallery.addEventListener("click", function (event) {
-    const button = event.target.closest(".details-button");
-    if (!button) return;
-    const card = button.closest(".destination-card");
-    const details = card.querySelector(".extra-details");
-    details.hidden = !details.hidden;
-    button.textContent = details.hidden
-        ? "View Details"
-        : "Hide Details";
-});
+if (gallery) {
+    gallery.addEventListener("click", function (event) {
+        const button = event.target.closest(".details-button");
+        if (!button) return;
+        const card = button.closest(".destination-card");
+        const details = card.querySelector(".extra-details");
+        details.hidden = !details.hidden;
+        button.textContent = details.hidden
+            ? "View Details"
+            : "Hide Details";
+    });
+}
 // Sort destinations alphabetically
 if (sortButton && gallery) {
     sortButton.addEventListener("click", function () {
@@ -121,5 +123,4 @@ if (sortButton && gallery) {
 if (gallery) {
     displayDestinations(destinations);
 }
-
 
