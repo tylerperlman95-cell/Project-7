@@ -4,7 +4,7 @@
 const destinations = [
     {
         name: "Paris, France",
-        category: "Cities",
+        // category: "Cities",
         image: "images/France.jpg",
         description: "Known for its famous landmarks, beautiful streets, and delicious food.",
         details: "Visit the Eiffel Tower, try French croissants, and explore the Louvre Museum.",
@@ -13,7 +13,7 @@ const destinations = [
     },
     {
         name: "Playa del Carmen, Mexico",
-        category: "Beaches",
+        // category: "Beaches",
         image: "images/Mexico.jpg",
         description: "Known for its beaches, shopping areas, water activities, and food.",
         details: "Enjoy snorkeling, try real Mexican food, and swim with dolphins.",
@@ -22,7 +22,7 @@ const destinations = [
     },
     {
         name: "Los Angeles, California",
-        category: "Cities",
+        // category: "Cities",
         image: "images/LosAngeles.jpg",
         description: "Known for its celebrity landmarks and the Hollywood Sign.",
         details: "Walk the Hollywood Walk of Fame, Visit the Hollywood Sign, and Explore Universal Studios.",
@@ -31,7 +31,7 @@ const destinations = [
     },
     {
         name: "Orlando, Florida",
-        category: "Cities",
+        // category: "Cities",
         image: "images/Florida.jpg",
         description: "Known for its amazing theme parks.",
         details: "Visit SeaWorld, Walt Disney World, and Disney Springs.",
@@ -40,7 +40,7 @@ const destinations = [
     },
     {
         name: "Tokyo, Japan",
-        category: "Cities",
+        // category: "Cities",
         image: "images/Japan.jpg",
         description: "Known for its technology, culture, and exciting attractions.",
         details: "Explore Shibuya Crossing, visit Senso-ji Temple, and explore Akihabara.",
@@ -49,7 +49,7 @@ const destinations = [
     },
     {
         name: "New York, New York",
-        category: "Cities",
+        // category: "Cities",
         image: "images/NewYork.jpg",
         description: "Known for the Statue of Liberty, Broadway, and shops.",
         details: "Visit Times Square, see the Statue of Liberty, and explore Central Park.",
@@ -81,7 +81,6 @@ function displayDestinations(list) {
                 </div>
             </div>
             <div class="destination-info">
-                <p>${destination.category}</p>
                 <p>${destination.description}</p>
                 <button type="button" class="details-button">
                     View Details
@@ -94,6 +93,9 @@ function displayDestinations(list) {
         gallery.appendChild(card);
     });
 }
+
+// <p>${destination.category}</p>
+
 // 4. View Details button
 if (gallery) {
     gallery.addEventListener("click", function (event) {

@@ -170,9 +170,20 @@
     box-sizing: border-box;
 }
 
+/* Tips Page */
+.tips-page main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
 .tips-page main h1 {
     text-align: center;
-    color: rgb(216, 35, 35);
+    color: rgb(252, 248, 4);
+    /* Changed from red to match your other yellow h1 headings */
+    text-shadow: 2px 2px 3px rgba(18, 59, 93, 0.3);
+    /* Added shadow to match your other h1 headings */
     font-size: 32px;
     margin-bottom: 30px;
 }
