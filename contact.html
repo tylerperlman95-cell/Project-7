@@ -18,19 +18,21 @@
             <a href="contact.html">Contact</a>
         </nav>
     </header>
-    <main>
-        <h1>Contact</h1>
+    <main class="contact-main">
+        <section class="contact-section" aria-labelledby="contact-title">
+            <h1 id="contact-title">Contact</h1>
+            <p>If you have any questions, don't hesitate to ask!</p>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
     </main>
-    <p>If you have any questions, don't hesitate to ask!</p>
-    <form>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
-        <button type="submit">Submit</button>
-    </form>
 
     <footer>Explore Your Imagination / 2026</footer>
 </body>

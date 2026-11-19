@@ -62,6 +62,11 @@ const destinations = [
 const gallery = document.getElementById("destination-gallery");
 const sortButton = document.getElementById("sort-az");
 
+function getDestinationId(name) {
+    return name.toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
 
 // 3. Display destination cards
 function displayDestinations(list) {
@@ -73,6 +78,7 @@ function displayDestinations(list) {
     list.forEach(destination => {
         const card = document.createElement("div");
         card.className = "destination-card";
+        card.id = getDestinationId(destination.name);
         card.innerHTML = `
             <div class="destination-image">
                 <img src="${destination.image}" alt="${destination.name}">
@@ -82,12 +88,12 @@ function displayDestinations(list) {
             </div>
             <div class="destination-info">
                 <p>${destination.description}</p>
-                <button type="button" class="details-button">
-                    View Details
-                </button>
                 <p class="extra-details" hidden>
                     ${destination.details}
                 </p>
+                <button type="button" class="details-button">
+                    View Details
+                </button>
             </div>
         `;
         gallery.appendChild(card);
@@ -111,18 +117,70 @@ if (gallery) {
 }
 // Sort destinations alphabetically
 if (sortButton && gallery) {
+    let isSortedAlphabetically = false;
+
     sortButton.addEventListener("click", function () {
-        const sortedDestinations = [...destinations];
+        isSortedAlphabetically = !isSortedAlphabetically;
 
-        sortedDestinations.sort((a, b) =>
-            a.name.localeCompare(b.name)
-        );
+        if (isSortedAlphabetically) {
+            const sortedDestinations = [...destinations].sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
+            displayDestinations(sortedDestinations);
+            sortButton.textContent = "Sort Original";
+        } else {
+            displayDestinations(destinations);
+            sortButton.textContent = "Sort A-Z";
+        }
 
-        displayDestinations(sortedDestinations);
     });
 }
 // 5. Display all destinations when page loads
 if (gallery) {
     displayDestinations(destinations);
+
+    const destinationId = window.location.hash.slice(1);
+    if (destinationId) {
+        const card = document.getElementById(destinationId);
+        if (card) {
+            const details = card.querySelector(".extra-details");
+            const button = card.querySelector(".details-button");
+            details.hidden = false;
+            button.textContent = "Hide Details";
+            card.scrollIntoView();
+        }
+    }
 }
 
+const searchBar = document.getElementById("searchBar");
+const searchButton = document.getElementById("searchButton");
+
+if (searchBar && searchButton) {
+    function searchDestinations() {
+        const searchValue = searchBar.value.toLowerCase().trim();
+
+        if (!searchValue) {
+            alert("Please enter a destination to search.");
+            return;
+        }
+
+        const destination = destinations.find(item =>
+            item.name.toLowerCase().includes(searchValue)
+        );
+
+        if (destination) {
+            window.location.href = "destinations.html#" +
+                getDestinationId(destination.name);
+        } else {
+            alert("Sorry! Destination not found. Please try another search.");
+        }
+    }
+
+    searchButton.addEventListener("click", searchDestinations);
+
+    searchBar.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            searchDestinations();
+        }
+    });
+}
